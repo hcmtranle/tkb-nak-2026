@@ -1,6 +1,6 @@
 import React from 'react';
 import { ActiveTab, SchoolInfo, ScheduleConflict } from '../types';
-import { Calendar, Users, GraduationCap, AlertTriangle, Code2, Settings, Download, Sparkles, RefreshCw } from 'lucide-react';
+import { Calendar, Users, GraduationCap, AlertTriangle, Code2, Settings, Download, Sparkles, RefreshCw, Printer, LogOut } from 'lucide-react';
 
 interface HeaderProps {
   schoolInfo: SchoolInfo;
@@ -11,6 +11,8 @@ interface HeaderProps {
   onExportExcel: () => void;
   onOpenAiAssist: () => void;
   totalClassesCount: number;
+  onLogout?: () => void;
+  onOpenPrint?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -22,6 +24,8 @@ export const Header: React.FC<HeaderProps> = ({
   onExportExcel,
   onOpenAiAssist,
   totalClassesCount,
+  onLogout,
+  onOpenPrint,
 }) => {
   const errorCount = conflicts.filter((c) => c.severity === 'error').length;
 
@@ -75,6 +79,26 @@ export const Header: React.FC<HeaderProps> = ({
             <Download className="w-3.5 h-3.5 text-slate-500" />
             <span>Xuất Excel</span>
           </button>
+
+          {onOpenPrint && (
+            <button
+              onClick={onOpenPrint}
+              className="flex items-center space-x-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs rounded-xl transition-all shadow-sm"
+            >
+              <Printer className="w-3.5 h-3.5" />
+              <span>In PDF</span>
+            </button>
+          )}
+
+          {onLogout && (
+            <button
+              onClick={onLogout}
+              className="flex items-center space-x-2 px-3 py-2 bg-white border border-slate-200 hover:bg-rose-50 hover:border-rose-200 text-slate-500 hover:text-rose-600 font-medium text-xs rounded-xl transition-all shadow-sm"
+              title="Đăng xuất"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
       </div>
 

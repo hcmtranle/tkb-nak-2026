@@ -9,6 +9,7 @@ interface ClassScheduleViewProps {
   subjects: Subject[];
   teachers: Teacher[];
   slots: ScheduleSlot[];
+  readOnly?: boolean;
 }
 
 export const ClassScheduleView: React.FC<ClassScheduleViewProps> = ({
@@ -17,6 +18,7 @@ export const ClassScheduleView: React.FC<ClassScheduleViewProps> = ({
   subjects,
   teachers,
   slots,
+  readOnly = false,
 }) => {
   const [selectedClassId, setSelectedClassId] = useState<string>(classes[0]?.id || '');
 
